@@ -50,7 +50,7 @@ async function registerCustomer(req, res) {
 async function getCustomer(req, res) {
     console.log("is it hereeee get user")
     try{
-        const theUser = await User.findOne({_id: req.params.username});
+        const theUser = await User.findOne({_id: req.params.name});
         if(theUser){
             return res.json(theUser);
         }
@@ -67,12 +67,12 @@ async function getCustomer(req, res) {
 }
 
 async function updateCustomer(req, res) {
-    console.log("is it hereeee update");
+    console.log("is it here to update");
     try{
         const body = req.body;
-        const theUser = await User.findOne({_id: req.params.username});
+        const theUser = await User.findOne({_id: req.params.name});
         if(theUser){
-            const updateUser = await User.findOneAndUpdate({_id: req.params.username}, body);
+            const updateUser = await User.findOneAndUpdate({_id: req.params.name}, body);
             // TODO: Add a Token Here
             return res.status(201).json({
                 message: "Updated Successfully!"
@@ -88,8 +88,52 @@ async function updateCustomer(req, res) {
         });
     }
 }
+async function deleteCustomer(req, res) {
+    console.log("is it hereeeennnnnnnnnnnnn delete");
+    try {
+        const result = await User.findOneAndDelete({ _id:  req.params.name });
+        console.log("Delete Result:", result);
+    
+        if (result) {
+            return res.status(200).json({
+                message: "Deleted Successfully!"
+            });
+        } else {
+            return res.status(404).json({
+                message: "User not found for deletion"
+            });
+        }
+    } catch (error) {
+        console.error("Delete Error:", error);
+        return res.status(500).json({
+            message: "Some Error Occurred during deletion"
+        });
+    }
+}
+
+
+
+async function deleteAllCustomers(req, res) {
+    console.log("comming to delete all customers");
+
+    try {
+        
+        await User.deleteMany({});  // Assuming your model is named 'User'
+
+        return res.status(200).json({
+            message: "All customers deleted successfully",
+        });
+    } catch (error) {
+        console.error("Error deleting all customers:", error);
+        return res.status(500).json({
+            message: "Some error occurred",
+        });
+    }
+}
 
 
 
 
-module.exports = { registerCustomer,getCustomer,getallCustomer,updateCustomer};
+
+
+module.exports = { registerCustomer,getCustomer,getallCustomer,updateCustomer,deleteCustomer,deleteAllCustomers};
