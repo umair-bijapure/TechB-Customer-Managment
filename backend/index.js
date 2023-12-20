@@ -10,18 +10,18 @@ app.use(cors());
 
 const customers = require("./routes/customer");
 
-app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('Welcome to TechB-TNGL');
-  });
+
+
 
 // Register routes
 console.log("Step 1")
 
-app.use("/api/user", customers);
+app.use("/", customers);
+
+
 // Start the server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`);
 });

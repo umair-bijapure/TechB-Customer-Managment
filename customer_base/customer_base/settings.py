@@ -24,6 +24,11 @@ SECRET_KEY = 'django-insecure-k&z3t&9-oc_k!)mia&z@-i9_moqb4#^$^t&no)o$fllc1c(b_s
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_AGE = 1209600  # 2 weeks in seconds, for example
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 
 ALLOWED_HOSTS = []
 
@@ -46,19 +51,19 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',  # Should be before CommonMiddleware
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-   
-  
 ]
 
+
 CORS_ALLOWED_ORIGINS = [
-     "http://localhost:3000", 
+    "http://localhost:3000",  # Replace with the actual origin of your React app
 ]
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+
 CSRF_COOKIE_NAME = 'csrftoken'
 
 ROOT_URLCONF = 'customer_base.urls'

@@ -1,14 +1,12 @@
 const express = require('express');
-const {registerCustomer, getallCustomer, getCustomer, updateCustomer } = require('../src/controllers/customer_controller');
+const { registerCustomer, getallCustomer, getCustomer, updateCustomer } = require('../src/controllers/customer_controller');
 
 const router = express.Router();
+console.log("Is it coming inside");
 
- // Place this route before the username route
- router.post('/user', registerCustomer);
+router.post('/create', registerCustomer);
+router.get('/get', getallCustomer);
 router.get('/:username', getCustomer);
-router.get('/', getallCustomer);
-
 router.put('/:username', updateCustomer);
-
 
 module.exports = router;
