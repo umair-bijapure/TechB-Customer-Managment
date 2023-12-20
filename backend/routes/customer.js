@@ -8,7 +8,7 @@ router.post('/create', registerCustomer);
 router.get('/get', getallCustomer);
 router.get('/get/:name', getCustomer);
 router.put('/:name', updateCustomer);
-router.delete('/delete/:name', deleteCustomer); // Add this line for deleting a single customer
+router.delete('/delete/:name', deleteCustomer); 
 router.delete('/deleteall', deleteAllCustomers);
 
 
